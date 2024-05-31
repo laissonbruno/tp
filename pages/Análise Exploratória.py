@@ -11,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-df = pd.read_csv(r'C://Users//Laisson Bruno//Downloads//teste//dados//CancerDataBase_Final_2.csv')
+df = pd.read_csv(r'C://Users//Laisson Bruno//Desktop//tp//dados//CancerDataBase_Final_2.csv')
 
 col1, col2, col3 = st.columns(3)  # Primeira linha com três colunas
 col4, col5 = st.columns(2)  # segunda linha com três colunas

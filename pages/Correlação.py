@@ -12,8 +12,7 @@ st.set_page_config(
 
 st.write('Correlação')
 
-df = pd.read_csv(r'C://Users//Laisson Bruno//Downloads//teste//dados//CancerDataBase_Final_2.csv')
-
+df = pd.read_csv(r'C://Users//Laisson Bruno//Desktop//tp//dados//CancerDataBase_Final_2.csv')
 
 num_cols = ['GDP per capita (current US$)', 'Current health expenditure per capita (current US$)', 'Deaths']
 corr_df = df[num_cols]
