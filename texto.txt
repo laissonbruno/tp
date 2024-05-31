@@ -1,0 +1,6 @@
+ow mano, me da uma moral fazendo favor.
+quais analises tu faria com esses dados?
+é pro trabalho do mestrado.
+ja tenho os dados descritivos basicos (top 5 com mais e menos mortes, maiores e menores pibs, maiores e menores gastos com saúde) - Gráfico de colunas, 
+serie temporal eu tenho as mortes por ano - gráfico de linha, Média de Gastos em Saúde per Capita por Região - gráfico de barras
+Relação entre PIB per Capita, Investimento em Saúde per Capita e Mortes por Região - scatter, Relação entre PIB per Capita, Investimento em Saúde per Capita e Mortes por Entidade - scatter

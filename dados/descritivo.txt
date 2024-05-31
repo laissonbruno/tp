@@ -1,0 +1,60 @@
+this is my csv file:
+
+Entity,Code,Year,Region,GDP per capita (current US$),Current health expenditure per capita (current US$),Types,Deaths
+Afghanistan,AFG,2002,Asia,182.1740366174384,17.00758553,Liver cancer,1019
+Afghanistan,AFG,2003,Asia,199.6432278958343,17.81492424,Liver cancer,1036
+Afghanistan,AFG,2004,Asia,221.8305307203071,21.42946434,Liver cancer,1054
+Afghanistan,AFG,2005,Asia,254.11527430556112,25.10707283,Liver cancer,1064
+Afghanistan,AFG,2006,Asia,274.0153943226528,28.91982269,Liver cancer,1057
+
+
+
+Com Python e Streamlit, você pode realizar várias análises e criar diversos tipos de gráficos para visualizar seus dados. Vou listar algumas opções para você:
+
+Análises Descritivas:
+Calcule estatísticas descritivas, como média, mediana, desvio padrão e quartis.
+Identifique valores ausentes e trate-os adequadamente.
+Explore a distribuição dos dados.
+Gráficos:
+Gráfico de Barras (Bar Chart): Ideal para comparar categorias ou valores em diferentes grupos.
+Gráfico de Linhas (Line Chart): Ótimo para mostrar tendências ao longo do tempo.
+Gráfico de Dispersão (Scatter Plot): Visualize a relação entre duas variáveis contínuas.
+Gráfico de Pizza (Pie Chart): Representa proporções de um todo.
+Histograma: Exibe a distribuição de uma variável contínua.
+Box Plot: Mostra a distribuição e os outliers dos dados.
+Heatmap: Visualiza a correlação entre variáveis.
+Mapas: Se você tiver dados geoespaciais, pode criar mapas interativos.
+Análises Avançadas:
+Regressão Linear: Explore relações lineares entre variáveis.
+Agrupamento (Clustering): Identifique grupos semelhantes nos dados.
+Análise de Séries Temporais: Modelagem e previsão de dados sequenciais.
+Interação com o Usuário:
+Com o Streamlit, você pode criar interfaces interativas para que os usuários filtrem, selecionem e explorem os dados de forma personalizada.
+Lembre-se de adaptar essas opções às suas necessidades específicas e ao contexto dos seus dados. Se precisar de ajuda com algum código específico ou tiver outras perguntas, estou à disposição! 😊
+
+
+
+import streamlit as st
+import pandas as pd
+import numpy as np
+
+st.title('dashboard test')
+
+df = pd.read_csv(r'C://Users//Laisson Bruno//Downloads//teste//CancerDataBase_Final_2.csv')
+
+
+# 
+media_mortes= df['Deaths'].mean()
+media_pib= df['GDP per capita (current US$)'].mean()
+media_health= df['Current health expenditure per capita (current US$)'].mean()
+
+col1, col2, col3 = st.columns(3)
+col1.metric("Mortes", round(media_mortes))
+col2.metric("PIB", round(media_pib))
+col3.metric("Health Cost", round(media_health))
+
+
+st.line_chart(df[["GDP per capita (current US$)", "Deaths"]])
+st.bar_chart(df.groupby("Region")["GDP per capita (current US$)"].mean())
+
+
