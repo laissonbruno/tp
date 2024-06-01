@@ -15,7 +15,7 @@ df = pd.read_csv(r'C://Users//Laisson Bruno//Desktop//tp//dados//CancerDataBase_
 
 st.write("# Welcome to Streamlit!")
 
-st.sidebar.success("Select a demo above.")
+st.sidebar.success("Selecione uma pagina acima")
 
 st.markdown(
     """
@@ -40,7 +40,6 @@ st.markdown("# Analises Descritivas dos dados")
 # Criar colunas para organizar a página
 col1, col2, col3 = st.columns(3)  # Primeira linha com três colunas
 col4, col5, col6 = st.columns(3)  # segunda linha com três colunas
-
 
 
 col4.write("Mortes")

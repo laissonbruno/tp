@@ -1,6 +1,59 @@
-ow mano, me da uma moral fazendo favor.
-quais analises tu faria com esses dados?
-é pro trabalho do mestrado.
-ja tenho os dados descritivos basicos (top 5 com mais e menos mortes, maiores e menores pibs, maiores e menores gastos com saúde) - Gráfico de colunas, 
-serie temporal eu tenho as mortes por ano - gráfico de linha, Média de Gastos em Saúde per Capita por Região - gráfico de barras
-Relação entre PIB per Capita, Investimento em Saúde per Capita e Mortes por Região - scatter, Relação entre PIB per Capita, Investimento em Saúde per Capita e Mortes por Entidade - scatter
+top 5 por média com mais mortes:
+
+Entity
+China            75421.418966
+United States    22127.055172
+India            21743.994828
+Japan            13011.600000
+Russia            9975.446552
+Name: Deaths, dtype: float64
+
+top 5 por média com menos mortes:
+
+Entity
+Nauru                    0.172414
+Tuvalu                   0.310345
+Palau                    0.848276
+Marshall Islands         1.351724
+Saint Kitts and Nevis    2.437931
+Name: Deaths, dtype: float64
+
+top 5 por média com maior pib
+
+Entity
+Monaco         156103.135502
+Luxembourg      96983.794782
+Norway          75330.942093
+Switzerland     69868.560049
+Qatar           61958.920702
+Name: GDP per capita (current US$), dtype: float64
+
+top 5 por média com menor pib
+
+Entity
+Burundi                         197.492257
+Democratic Republic of Congo    347.650735
+Central African Republic        376.384245
+Ethiopia                        388.638280
+Sierra Leone                    414.362254
+Name: GDP per capita (current US$), dtype: float64
+
+top 5 por média com maior gasto em saúde
+
+Entity
+United States    7639.813062
+Switzerland      7335.781970
+Norway           6817.898242
+Luxembourg       5813.262878
+Denmark          5185.341809
+Name: Current health expenditure per capita (current US$), dtype: float64
+
+top 5 por média com menor gasto em saúde
+
+Entity
+Democratic Republic of Congo    13.694503
+Ethiopia                        14.942013
+Burundi                         16.586376
+Central African Republic        19.314532
+Madagascar                      19.402245
+Name: Current health expenditure per capita (current US$), dtype: float64

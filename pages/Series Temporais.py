@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from statsmodels.tsa.seasonal import seasonal_decompose
+import matplotlib.pyplot as plt
+from prophet import Prophet
 
 
 st.set_page_config(
@@ -15,20 +18,49 @@ st.write('Series Temporais')
 df = pd.read_csv(r'C://Users//Laisson Bruno//Desktop//tp//dados//CancerDataBase_Final_2.csv')
 
 
-mortes_data = df[['Year', 'Deaths']]
-mortes_anuais = mortes_data.groupby('Year')['Deaths'].mean().reset_index()
+st.sidebar.success("Faça ao minimo duas seleções nos filtros abaixo.")
 
-# Criar um gráfico de série temporal
-fig1 = px.line(mortes_anuais, x='Year', y='Deaths', title='Série Temporal de Mortes')
-st.plotly_chart(fig1, use_container_width=True)
+# Cria a barra lateral
+with st.sidebar:
 
+    # Container para regiões
+    container1 = st.container(height=100)
+    all1 = st.checkbox("Selecione todas regiões", value=True)
 
-# Selecionar apenas as colunas necessárias
-gastos_saude_data = df[['Region', 'Current health expenditure per capita (current US$)']]
+    if all1:
+        selected_options1 = container1.multiselect("Selecione uma ou mais regiões:", df["Region"].unique(), df["Region"].unique())
+    else:
+        selected_options1 = container1.multiselect("Selecione uma ou mais regiões:", df["Region"].unique())
 
-# Agrupar os dados por região e calcular a média
-gastos_saude_data = gastos_saude_data.groupby('Region')['Current health expenditure per capita (current US$)'].mean().reset_index()
+    # Container para anos
+    container2 = st.container(height=100)
+    all2 = st.checkbox("Selecione todos anos", value=True)
 
-# Criar um gráfico de barras
-fig2 = px.bar(gastos_saude_data, x='Region', y='Current health expenditure per capita (current US$)', title='Média de Gastos em Saúde per Capita por Região')
-st.plotly_chart(fig2, use_container_width=True)
+    if all2:
+        selected_options2 = container2.multiselect("Selecione um ou varios anos:", df["Year"].unique(), df["Year"].unique())
+    else:
+        selected_options2 = container2.multiselect("Selecione um ou varios anos:", df["Year"].unique())
+
+    # Container para tipos de cancer
+    container3 = st.container(height=100)
+    all3 = st.checkbox("Selecione todos os tipos", value=True)
+
+    if all3:
+        selected_options3 = container3.multiselect("Selecione um ou mais tipos de cancer:", df["Types"].unique(), df["Types"].unique())
+    else:
+        selected_options3 = container3.multiselect("Selecione um ou mais tipos de cancer:", df["Types"].unique())
+
+# Filtra os dados com base nas seleções
+filtered_df = df[
+    (df["Region"].isin(selected_options1)) &
+    (df["Year"].isin(selected_options2)) &
+    (df["Types"].isin(selected_options3))
+]
+
+# Gráfico de Linha com média do "GDP per capita (current US$)" por país ao longo dos anos
+fig = px.line(filtered_df.groupby(["Year", "Entity"])["GDP per capita (current US$)"].mean().reset_index(), x="Year", y="GDP per capita (current US$)", color="Entity")
+st.plotly_chart(fig)
+
+# Gráfico de Linha com média de "Deaths" por país ao longo dos anos
+fig = px.line(filtered_df.groupby(["Year", "Region"])["Deaths"].mean().reset_index(), x="Year", y="Deaths", color="Region")
+st.plotly_chart(fig)

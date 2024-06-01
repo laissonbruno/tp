@@ -20,21 +20,15 @@ col8, col9  = st.columns(2)  # segunda linha com três colunas
 col10, col11  = st.columns(2)  # segunda linha com três colunas
 
 
-col2.write("# Plotting Demo")
-st.sidebar.header("Plotting Demo")
-st.sidebar.write(
-    """This demo illustrates a combination of plotting and animation with
-Streamlit. We're generating a bunch of random numbers in a loop for around
-5 seconds. Enjoy!"""
-)
+col2.write("# Análise exploratória")
 
 
-most_deaths = df.groupby('Entity')['Deaths'].sum().sort_values(ascending=False).head(5)
-least_deaths = df.groupby('Entity')['Deaths'].sum().sort_values(ascending=True).head(5)
-max_gdp_countries = df.groupby('Entity')['GDP per capita (current US$)'].sum().sort_values(ascending=False).head(5)
-min_gdp_countries = df.groupby('Entity')['GDP per capita (current US$)'].sum().sort_values(ascending=True).head(5)
-most_health_exp = df.groupby('Entity')['Current health expenditure per capita (current US$)'].sum().sort_values(ascending=False).head(5)
-least_health_exp = df.groupby('Entity')['Current health expenditure per capita (current US$)'].sum().sort_values(ascending=True).head(5)
+most_deaths = df.groupby('Entity')['Deaths'].mean().sort_values(ascending=False).head(5)
+least_deaths = df.groupby('Entity')['Deaths'].mean().sort_values(ascending=True).head(5)
+max_gdp_countries = df.groupby('Entity')['GDP per capita (current US$)'].mean().sort_values(ascending=False).head(5)
+min_gdp_countries = df.groupby('Entity')['GDP per capita (current US$)'].mean().sort_values(ascending=True).head(5)
+most_health_exp = df.groupby('Entity')['Current health expenditure per capita (current US$)'].mean().sort_values(ascending=False).head(5)
+least_health_exp = df.groupby('Entity')['Current health expenditure per capita (current US$)'].mean().sort_values(ascending=True).head(5)
 
 
 col4.write("Países com mais mortes:")
@@ -63,3 +57,15 @@ fig6 = px.bar(least_health_exp, x=least_health_exp.index, y='Current health expe
 col9.plotly_chart(fig6)
 
 
+
+st.write(
+    """
+## Análise da Mortalidade por Câncer e Investimento em Saúde Global
+
+Com base nos dados apresentados, observa-se que a mortalidade por câncer varia significativamente entre os países, com a China liderando em número de mortes, enquanto países menores como Nauru e Tuvalu registram as menores taxas. No entanto, é importante ressaltar que a quantidade de mortes por câncer pode não estar diretamente ligada ao PIB per capita e aos gastos em saúde per capita. Mesmo países com alto investimento e PIB alto, como os Estados Unidos e Suíça, podem ter um grande número de mortes por câncer. Isso se deve ao fato de que, quanto mais habitantes um país tem, consequentemente mais mortes ele terá, como é o caso da Índia e da China.
+
+O **PIB per capita** reflete a disparidade econômica, com nações como Mônaco e Luxemburgo apresentando os maiores valores, indicando maior capacidade de investimento em saúde. Os **gastos em saúde per capita** seguem essa tendência, com países como os Estados Unidos e Suíça investindo mais, em contraste com nações como a República Democrática do Congo e Etiópia, que têm recursos limitados para a saúde.
+
+Esses insights destacam a interconexão entre saúde, economia e investimento em cuidados médicos em escala global, mas também ressaltam que o número de mortes por câncer não depende apenas desses fatores. Outros elementos, como o tamanho da população e a incidência da doença, também desempenham um papel importante.
+"""
+)
