@@ -1,9 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
-from statsmodels.tsa.seasonal import seasonal_decompose
-import matplotlib.pyplot as plt
-from prophet import Prophet
 
 
 st.set_page_config(
@@ -58,9 +55,13 @@ filtered_df = df[
 ]
 
 # Gráfico de Linha com média do "GDP per capita (current US$)" por país ao longo dos anos
-fig = px.line(filtered_df.groupby(["Year", "Entity"])["GDP per capita (current US$)"].mean().reset_index(), x="Year", y="GDP per capita (current US$)", color="Entity")
+fig = px.line(filtered_df.groupby(["Year", "Region"])["GDP per capita (current US$)"].mean().reset_index(), x="Year", y="GDP per capita (current US$)", color="Region", title="Média do PIB per capita ao longo dos anos")
+fig.update_traces(mode='markers+lines')
 st.plotly_chart(fig)
 
+
 # Gráfico de Linha com média de "Deaths" por país ao longo dos anos
-fig = px.line(filtered_df.groupby(["Year", "Region"])["Deaths"].mean().reset_index(), x="Year", y="Deaths", color="Region")
+fig = px.area(filtered_df.groupby(["Year", "Region"])["Deaths"].mean().reset_index(), x="Year", y="Deaths", color="Region", title="Média de mortes ao longo dos anos - Gráfico de área")
+fig.update_traces(mode='markers+lines')
 st.plotly_chart(fig)
+
