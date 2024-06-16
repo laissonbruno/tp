@@ -38,7 +38,10 @@ st.markdown(
     Daniel Henriques - [Lattes](http://lattes.cnpq.br/3182580850135052)  
     Estanislau de Sena Filho - [Linkedin](https://www.linkedin.com/in/estanislau-sena-filho/)  
 
-    
+    ## Repositório
+
+    [Github](https://github.com/laissonbruno/tp_visualizacao_dados)
+
     ## Professora
 
     Raquel Cardoso de Melo Minardi - [Lattes](http://lattes.cnpq.br/9274887847308980)
