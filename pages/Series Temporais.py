@@ -19,33 +19,54 @@ st.sidebar.success("Faça ao minimo duas seleções nos filtros abaixo.")
 
 # Cria a barra lateral
 with st.sidebar:
-
     # Container para regiões
     container1 = st.container(height=100)
     all1 = st.checkbox("Selecione todas regiões", value=True)
 
     if all1:
-        selected_options1 = container1.multiselect("Selecione uma ou mais regiões:", df["Region"].unique(), df["Region"].unique())
+        selected_options1 = container1.multiselect(
+            "Selecione uma ou mais regiões:", 
+            sorted(df["Region"].unique()), 
+            sorted(df["Region"].unique())
+        )
     else:
-        selected_options1 = container1.multiselect("Selecione uma ou mais regiões:", df["Region"].unique())
+        selected_options1 = container1.multiselect(
+            "Selecione uma ou mais regiões:", 
+            sorted(df["Region"].unique())
+        )
 
     # Container para anos
     container2 = st.container(height=100)
     all2 = st.checkbox("Selecione todos anos", value=True)
 
     if all2:
-        selected_options2 = container2.multiselect("Selecione um ou varios anos:", df["Year"].unique(), df["Year"].unique())
+        selected_options2 = container2.multiselect(
+            "Selecione um ou varios anos:", 
+            sorted(df["Year"].unique()), 
+            sorted(df["Year"].unique())
+        )
     else:
-        selected_options2 = container2.multiselect("Selecione um ou varios anos:", df["Year"].unique())
+        selected_options2 = container2.multiselect(
+            "Selecione um ou varios anos:", 
+            sorted(df["Year"].unique())
+        )
 
     # Container para tipos de cancer
     container3 = st.container(height=100)
     all3 = st.checkbox("Selecione todos os tipos", value=True)
 
     if all3:
-        selected_options3 = container3.multiselect("Selecione um ou mais tipos de cancer:", df["Types"].unique(), df["Types"].unique())
+        selected_options3 = container3.multiselect(
+            "Selecione um ou mais tipos de cancer:", 
+            sorted(df["Types"].unique()), 
+            sorted(df["Types"].unique())
+        )
     else:
-        selected_options3 = container3.multiselect("Selecione um ou mais tipos de cancer:", df["Types"].unique())
+        selected_options3 = container3.multiselect(
+            "Selecione um ou mais tipos de cancer:", 
+            sorted(df["Types"].unique())
+        )
+
 
 # Filtra os dados com base nas seleções
 filtered_df = df[
