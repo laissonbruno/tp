@@ -12,7 +12,7 @@ st.set_page_config(
 
 st.write('Series Temporais')
 
-df = pd.read_csv(r'C://Users//Laisson Bruno//Desktop//tp//dados//CancerDataBase_Final_2.csv')
+df = pd.read_csv(r'dados//CancerDataBase_Final_2.csv')
 
 
 st.sidebar.success("Faça ao minimo duas seleções nos filtros abaixo.")

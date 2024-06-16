@@ -14,16 +14,16 @@ st.set_page_config(
 )
 
 # Carrega o arquivo CSV
-df = pd.read_csv(r'C://Users//Laisson Bruno//Desktop//tp//dados//CancerDataBase_Final_2.csv')
+df = pd.read_csv(r'dados//CancerDataBase_Final_2.csv')
 
 # Divide a página em colunas
-col1, col2, col3 = st.columns(3)  # Primeira linha com três colunas
-col4, col5 = st.columns(2)  # Segunda linha com duas colunas
-col6, col7 = st.columns(2)  # Segunda linha com duas colunas
-col8, col9 = st.columns(2)  # Segunda linha com duas colunas
-col10, col11 = st.columns(2)  # Segunda linha com duas colunas
+col1, col2, col3 = st.columns(3)
+col4, col5 = st.columns(2)  
+col6, col7 = st.columns(2)  
+col8, col9 = st.columns(2)  
+col10, col11 = st.columns(2)  
 
-# Título da página
+
 col2.write("# Análise exploratória")
 
 # Variaveis para utilização nos gráficos
@@ -57,10 +57,9 @@ fig.update_layout(
     title="Países com maior média de mortes - Gráfico de Radar",
 )
 
-# Exibir o gráfico na aplicação Streamlit
 col4.plotly_chart(fig)
 
-# Gráfico Sunburst com os países com menor média de mortes
+# Criando o gráfico Sunburst
 fig2 = px.sunburst(df[df['Entity'].isin(least_deaths.index)], path=['Region', 'Entity'], values='Deaths',
                    color='Deaths',
                    hover_data='GDP per capita (current US$)',
@@ -70,7 +69,7 @@ fig2.update_layout(title='Países com menor média de mortes - Gráfico Sunburst
 col5.plotly_chart(fig2)
 
 # Gráfico de Barras com os países com maior média por PIB
-fig3 = px.bar(max_gdp_countries, x='GDP per capita (current US$)', y=max_gdp_countries.index, title="Países com maior média por PIB", orientation='h', color_discrete_sequence=px.colors.sequential.Oryel_r)
+fig3 = px.bar(max_gdp_countries, x='GDP per capita (current US$)', y=max_gdp_countries.index, title="Países com maior média por PIB", orientation='h', color_discrete_sequence=px.colors.sequential.Agsunset)
 fig3.update_layout(
     xaxis_title='PIB per capita',
     yaxis_title='Países'
@@ -79,7 +78,7 @@ fig3.update_xaxes(categoryorder='total descending')
 col6.plotly_chart(fig3)
 
 # Gráfico de Barras Horizontais com os países com menor média por PIB
-fig4 = px.bar(min_gdp_countries, x='GDP per capita (current US$)', y=min_gdp_countries.index, title="Países com menor média por PIB", orientation='h', color_discrete_sequence=px.colors.sequential.Oryel_r)
+fig4 = px.bar(min_gdp_countries, x='GDP per capita (current US$)', y=min_gdp_countries.index, title="Países com menor média por PIB", orientation='h', color_discrete_sequence=px.colors.sequential.Agsunset)
 fig4.update_layout(
     xaxis_title='PIB per capita',
     yaxis_title='Países'
@@ -87,7 +86,7 @@ fig4.update_layout(
 col7.plotly_chart(fig4)
 
 # Gráfico de Barras Horizontais com os países com maior média de investimentos em saúde
-fig5 = px.bar(most_health_exp, x=most_health_exp.index, y='Current health expenditure per capita (current US$)', title="Países com maior média de investimentos em saúde", color_discrete_sequence=px.colors.sequential.Oryel_r)
+fig5 = px.bar(most_health_exp, x=most_health_exp.index, y='Current health expenditure per capita (current US$)', title="Países com maior média de investimentos em saúde", color_discrete_sequence=px.colors.sequential.Agsunset)
 fig5.update_layout(
     xaxis_title='Países',
     yaxis_title='Gasto com saúde per capita'
@@ -95,7 +94,11 @@ fig5.update_layout(
 col8.plotly_chart(fig5)
 
 # Gráfico de Barras com os países com menor média de investimentos em saúde
-fig6 = px.bar(least_health_exp, x=least_health_exp.index, y='Current health expenditure per capita (current US$)', title="Países com menor média de investimentos em saúde", color_discrete_sequence=px.colors.sequential.Oryel_r)
+fig6 = px.bar(least_health_exp, 
+              x=least_health_exp.index, 
+              y='Current health expenditure per capita (current US$)', 
+              title="Países com menor média de investimentos em saúde", 
+              color_discrete_sequence=px.colors.sequential.Agsunset)
 fig6.update_layout(
     xaxis_title='Países',
     yaxis_title='Gasto com saúde per capita'
@@ -103,9 +106,14 @@ fig6.update_layout(
 col9.plotly_chart(fig6)
 
 # Gráfico de Treemap com o número de mortes por região/país
-treemap = df[['Region', 'Entity', 'Types', 'Deaths', 'GDP per capita (current US$)']]
-fig7 = px.treemap(treemap, path=['Region', 'Entity'], values='Deaths', color='Deaths', title="Número de mortes por Região/Pais", color_continuous_scale='Oryel')
-fig7.update_layout(margin = dict(t=50, l=25, r=25, b=25))
+treemap = df.groupby(['Region', 'Entity']).agg({'Deaths': 'mean'}).reset_index()
+fig7 = px.treemap(treemap, 
+                  path=['Region', 'Entity'], 
+                  values='Deaths', 
+                  color='Deaths', 
+                  title="Média de mortes por Região/País", 
+                  color_continuous_scale='Reds')
+fig7.update_layout(margin=dict(t=50, l=25, r=25, b=25))
 st.plotly_chart(fig7)
 
 # Texto de análise

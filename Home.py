@@ -10,7 +10,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-df = pd.read_csv(r'C://Users//Laisson Bruno//Desktop//tp//dados//CancerDataBase_Final_2.csv')
+df = pd.read_csv(r'dados//CancerDataBase_Final_2.csv')
 
 
 st.sidebar.success("Selecione uma pagina acima")
