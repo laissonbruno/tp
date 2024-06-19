@@ -42,6 +42,10 @@ st.markdown(
 
     [Github](https://github.com/laissonbruno/tp_visualizacao_dados)
 
+    ## Slides
+    
+    [PDF - Slides](https://github.com/laissonbruno/tp_visualizacao_dados_ferramenta/blob/main/Slides%20-%20Apresenta%C3%A7%C3%A3o.pdf)
+
     ## Professora
 
     Raquel Cardoso de Melo Minardi - [Lattes](http://lattes.cnpq.br/9274887847308980)
