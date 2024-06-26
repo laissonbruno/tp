@@ -37,12 +37,12 @@ col2.write("")
 with st.sidebar:
     # Container para regiões
     container1 = st.container(height=100)
-    all1 = st.checkbox("Selecione todos países", value=True)
+    all1 = st.checkbox("Selecione todas regiões", value=True)
 
     if all1:
-        selected_options1 = container1.multiselect("Selecione um ou mais países:", df["Entity"].unique(), df["Entity"].unique())
+        selected_options1 = container1.multiselect("Selecione uma ou mais regiões:", df["Region"].unique(), df["Region"].unique())
     else:
-        selected_options1 = container1.multiselect("Selecione um ou mais países:", df["Entity"].unique())
+        selected_options1 = container1.multiselect("Selecione uma ou mais regiões:", df["Region"].unique())
 
     # Container para anos
     container2 = st.container(height=100)
@@ -78,7 +78,7 @@ with st.sidebar:
 
 # Filtra os dados com base nas seleções
 filtered_df = df[
-    (df["Entity"].isin(selected_options1)) &
+    (df["Region"].isin(selected_options1)) &
     (df["Year"].isin(selected_options2)) &
     (df["Types"].isin(selected_options3))
 ]
@@ -132,11 +132,13 @@ filtered_df = df.drop(['lat', 'lon'], axis=1)
 filtered_df = filtered_df.rename(
     columns={
         "Current health expenditure per capita (current US$)": "Gasto em saúde per capita",
-        "GDP per capita (current US$)": "GDP per capita",
-        "Entity": "País",
+        "GDP per capita (current US$)": "PIB per capita",
+        "Region": "Região",
         "Year": "Ano",
         "Types": "Tipos",
-        "Deaths": "Óbitos"
+        "Deaths": "Óbitos",
+        "Entity": "Países",
+        "Code": "ISO"
     }
 )
 
